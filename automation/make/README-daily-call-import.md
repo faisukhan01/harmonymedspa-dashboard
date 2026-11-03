@@ -3,7 +3,7 @@
 Scenario **6807651** "Harmony – Daily Call Import (Google Ads → Calls)", org 8106641 (us2), team 2465229.
 Blueprint: `Harmony - Daily Call Import.blueprint.json`. Email template source: `../make-call-lead-email-template.html`.
 
-Status: **built, inactive, never run.** Schedule is set to daily 08:00 but does nothing until activated.
+Status: **active since 2026-11-03.** Runs daily at 08:00 America/New_York.
 
 ## Flow
 
@@ -12,7 +12,7 @@ Status: **built, inactive, never run.** Schedule is set to daily 08:00 but does 
 2  Set variables: call values (time, duration, source, area code)
 3  Set variables: classification (id, kind, assessment, search formulas)
 4  Airtable search Calls: same Google call, or a hand-entered call ±60s / ±2s
-5  Array aggregator (always emits, even when nothing is found)
+5  Array aggregator (emits even when nothing is found, with no array items)
 6  Router
    ├─ Hand-entered match (found, no Google Call) → 7 update: store Google Call. No email.
    ├─ New call (nothing found)
@@ -29,29 +29,32 @@ Change both together. Sources are mapped by campaign ID: 24134330302 → CS2, 24
 | Google Ads | `google-ads-reports:runCustomReport`, connection 9624908, account 7080113749 |
 | Airtable | connection 9625252, base appNL010pW9LUpgST, Calls tbl81JwtzjS2wFRLD (fields mapped by ID) |
 | Gmail | connection 11267570 (shahzaibhamid02@gmail.com, same as Speed-to-Lead) |
-| Email to | **abdulqayyum3116@gmail.com only, for testing.** Add haydenalamo@harmonymedspafl.com when activating. |
+| Email to | haydenalamo@harmonymedspafl.com, abdulqayyum3116@gmail.com |
 | Link | `https://crm.harmonymedspafl.com/leads?view=all&source=Call+Leads&call=<Call ID>`; opens the call's Add details form, survives sign-in |
 | Settings | sequential processing on, incomplete executions stored |
 
-## Before activating (one-time verification)
+## Verified on 2026-11-03
 
-None of this has run yet. Two things are assumptions until the first run:
+Tested against live data with emails going to Abdul only:
 
-- **Output key names** of the report module. The blueprint uses `callView_startCallDateTime`, `callView_callDurationSeconds`, `callView_callStatus`, `callView_callerAreaCode`, `callView_callerCountryCode`, `callView_resourceName`, `campaign_id`, `campaign_name` (same pattern as the Search Terms scenario's `searchTermView_searchTerm`). If module 1's output differs, remap module 2.
-- **Google accepts the WHERE on `start_call_date_time`.** If module 1 errors on it, delete the WHERE and add a filter after module 2 on the parsed date.
+- **Google field names and the date filter** work as the blueprint expects.
+- **Hand-entered match:** the Oct 21 9:52 AM call linked to its existing row (Google Call filled, same Call ID, no email, no new row).
+- **Repeat run:** nothing written and no email, so daily re-checks are safe.
+- **New-call path**, with the search forced to find nothing and the save step removed: it ran through to a real email.
 
-Steps:
+**Not yet exercised: module 11 (Save call).** Google had no calls after Oct 21, and creating a test row would pollute the reporting data. The module's configuration validates against the live Calls schema, but the first real new call is its first run. After that call, check that the row and the email both exist. If module 11 ever fails, the run is kept under Incomplete executions and the next day's run retries, because the call stays in the 3-day window.
 
-1. Widen the window once: in module 1 change `addDays(now; -3)` to `addDays(now; -8)`. This fills the gap since the last hand-entered call (Oct 21).
-2. **Run once.** Check the Calls table:
-   - New rows exist from Oct 22 onward with Origin "Google Ads sync". Kind is a valid choice, and Occurred At is in the right ET time.
-   - The Oct 21 9:52 AM call was **linked** (its row now has a Google Call), not duplicated.
-   - No two rows share a Call ID.
-   - Abdul received one email per new row, and the button opens that call.
-3. **Run once again.** Nothing new should be created and no email sent. This proves de-duplication.
-4. Set module 1 back to `-3`. Add Hayden to module 12's To. Confirm the org timezone is ET (Make schedules in the org/user timezone), or adjust 08:00. **Activate.**
+## Make formula rules learned here
 
-Expected cost: about 1 operation per run with no calls, about 4 per already-imported call (re-checked for 3 days), and about 10 per new call.
+The module validators and `validate_blueprint_schema` do not parse formulas. These only fail at run time, as `BlueprintValidationError: Scenario validation failed`, with no module named:
+
+- Regex literals in `replace()` (`/.../g`) caused the validation failure here; use plain values. New campaigns therefore get the Call ID prefix `gads` instead of a slug of the campaign name.
+- Make's reference says logical operators are `&` and `|`, not the words `and` / `or`, so the formulas use those. The error count did not change when they were replaced, so the words alone may not fail validation.
+- After an aggregator receives nothing, `length(n.array) = 0` does **not** pass a filter. Test `first(map(n.array; "id"))` with `notexist` instead.
+
+To debug, reduce the flow to read-only modules and compare `operations` from `executions_get`; `executions_get-detail` returns no module data for these runs.
+
+Expected cost: 1 operation per run with no calls, 5 per already-imported call (re-checked for 3 days), and about 10 per new call.
 
 ## Not to run alongside
 

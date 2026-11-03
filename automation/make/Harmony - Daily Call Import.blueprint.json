@@ -83,7 +83,7 @@
           },
           {
             "name": "prefix",
-            "value": "{{switch(1.campaign_id; \"24134330302\"; \"cs2\"; \"24080482948\"; \"web\"; lower(replace(1.campaign_name; /[^A-Za-z0-9]+/g; \"-\")))}}"
+            "value": "{{switch(1.campaign_id; \"24134330302\"; \"cs2\"; \"24080482948\"; \"web\"; \"gads\")}}"
           }
         ]
       },
@@ -93,6 +93,17 @@
           "y": 0,
           "name": "Call values"
         }
+      },
+      "filter": {
+        "name": "Has a Google call id",
+        "conditions": [
+          [
+            {
+              "a": "{{1.callView_resourceName}}",
+              "o": "exist"
+            }
+          ]
+        ]
       }
     },
     {
@@ -109,15 +120,15 @@
           },
           {
             "name": "area_label",
-            "value": "{{ifempty(2.area; \"Unknown\")}}{{if(2.area = \"\" or 2.area = \"941\"; \"\"; if(2.in_state; \" · Florida\"; if(2.country = \"US\"; \"\"; \" · \")))}}{{if(2.area = \"\" or 2.country = \"US\"; \"\"; 2.country)}}"
+            "value": "{{ifempty(2.area; \"Unknown\")}}{{if(2.area = \"\" | 2.area = \"941\"; \"\"; if(2.in_state; \" · Florida\"; if(2.country = \"US\"; \"\"; \" · \")))}}{{if(2.area = \"\" | 2.country = \"US\"; \"\"; 2.country)}}"
           },
           {
             "name": "kind",
-            "value": "{{if(2.missed; \"hangup\"; if(2.area != \"\" and 2.in_state = false; \"out-of-state\"; if(2.duration < 15; \"hangup\"; if(2.duration < 30; \"brief\"; \"conversation\"))))}}"
+            "value": "{{if(2.missed; \"hangup\"; if(2.area != \"\" & 2.in_state = false; \"out-of-state\"; if(2.duration < 15; \"hangup\"; if(2.duration < 30; \"brief\"; \"conversation\"))))}}"
           },
           {
             "name": "assessment",
-            "value": "{{if(2.missed; \"Missed call\"; if(2.area != \"\" and 2.in_state = false; if(2.duration >= 60; \"Out of state, but long\"; \"Out of state\"); if(2.duration < 15; \"Hangup\"; if(2.duration < 30; \"Brief\"; if(2.duration < 45; \"Short but real\"; if(2.duration < 180; \"Real conversation\"; \"Long conversation\"))))))}}"
+            "value": "{{if(2.missed; \"Missed call\"; if(2.area != \"\" & 2.in_state = false; if(2.duration >= 60; \"Out of state, but long\"; \"Out of state\"); if(2.duration < 15; \"Hangup\"; if(2.duration < 30; \"Brief\"; if(2.duration < 45; \"Short but real\"; if(2.duration < 180; \"Real conversation\"; \"Long conversation\"))))))}}"
           },
           {
             "name": "result_label",
@@ -185,6 +196,9 @@
           "y": 0,
           "name": "Matches"
         }
+      },
+      "flags": {
+        "stopIfEmpty": false
       }
     },
     {
@@ -273,9 +287,8 @@
                 "conditions": [
                   [
                     {
-                      "a": "{{length(5.array)}}",
-                      "o": "number:equal",
-                      "b": "0"
+                      "a": "{{first(map(5.array; \"id\"))}}",
+                      "o": "notexist"
                     }
                   ]
                 ]
@@ -297,6 +310,9 @@
                   "y": 150,
                   "name": "Same-minute calls"
                 }
+              },
+              "flags": {
+                "stopIfEmpty": false
               }
             },
             {
@@ -309,11 +325,11 @@
                 "variables": [
                   {
                     "name": "final_id",
-                    "value": "{{3.call_id}}{{if(length(9.array) > 0; \"-2\"; \"\")}}"
+                    "value": "{{3.call_id}}{{if(ifempty(first(map(9.array; \"id\")); \"none\") = \"none\"; \"\"; \"-2\")}}"
                   },
                   {
                     "name": "dashboard_url",
-                    "value": "https://crm.harmonymedspafl.com/leads?view=all&source=Call+Leads&call={{3.call_id}}{{if(length(9.array) > 0; \"-2\"; \"\")}}"
+                    "value": "https://crm.harmonymedspafl.com/leads?view=all&source=Call+Leads&call={{3.call_id}}{{if(ifempty(first(map(9.array; \"id\")); \"none\") = \"none\"; \"\"; \"-2\")}}"
                   }
                 ]
               },
@@ -370,6 +386,7 @@
               },
               "mapper": {
                 "to": [
+                  "haydenalamo@harmonymedspafl.com",
                   "abdulqayyum3116@gmail.com"
                 ],
                 "subject": "New call lead · {{2.source}} · {{2.display_et}} · {{3.duration_label}}",
