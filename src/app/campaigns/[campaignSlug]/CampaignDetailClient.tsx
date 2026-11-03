@@ -48,6 +48,7 @@ import {
 } from "@/lib/campaigns/campaign-display";
 import type { CampaignSummary, NurtureEnrollment } from "@/lib/types/campaigns";
 import type { MessageLog } from "@/types/message-log";
+import StackedTable from "@/components/ui/StackedTable";
 
 const AddLeadsToCampaignModal = dynamic(() => import("@/components/campaigns/AddLeadsToCampaignModal"));
 
@@ -419,7 +420,7 @@ export default function CampaignDetailClient({ slug, initial, initialError = "" 
           </div>
         </div>
       </header>      <nav
-        className="sticky top-[64px] z-20 -mx-1 flex overflow-x-auto border-b border-[var(--border-subtle)] bg-[var(--background)] px-1 md:static md:bg-transparent"
+        className="sticky top-[64px] z-20 -mx-1 flex flex-wrap border-b border-[var(--border-subtle)] bg-[var(--background)] px-1 md:static md:bg-transparent"
         style={{
           backgroundColor:
             "color-mix(in srgb, var(--background) 96%, transparent)",
@@ -1063,8 +1064,8 @@ function NurtureOperationalTable({
           );
         })}
       </div>
-      <div className="hidden overflow-x-auto rounded-xl border border-white/10 md:block">
-        <table className="w-full min-w-[1080px] text-left text-xs">
+      <StackedTable stackBelow={900} className="hidden rounded-xl border border-white/10 md:block">
+        <table className="w-full text-left text-xs">
           <thead className="bg-[#0D0D12] text-[#858592]">
             <tr>
               {[
@@ -1207,7 +1208,7 @@ function NurtureOperationalTable({
             })}
           </tbody>
         </table>
-      </div>
+      </StackedTable>
     </>
   );
 }
@@ -1312,8 +1313,8 @@ function LeadTable({ items }: { items: Array<NurtureEnrollment | SpeedLead> }) {
           </article>
         ))}
       </div>
-      <div className="hidden overflow-x-auto rounded-xl border border-white/10 md:block">
-        <table className="w-full min-w-[900px] text-left text-xs">
+      <StackedTable stackBelow={900} className="hidden rounded-xl border border-white/10 md:block">
+        <table className="w-full text-left text-xs">
           <thead className="bg-white/5 text-[#858592]">
             <tr>
               {[
@@ -1365,7 +1366,7 @@ function LeadTable({ items }: { items: Array<NurtureEnrollment | SpeedLead> }) {
             )}
           </tbody>
         </table>
-      </div>
+      </StackedTable>
     </>
   );
 }

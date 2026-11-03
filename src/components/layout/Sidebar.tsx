@@ -2,7 +2,7 @@
 
 
 import { Skeleton } from "@/components/ui/Skeleton";
-import { useMemo } from "react";
+import { forwardRef, useMemo } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -47,10 +47,10 @@ interface SidebarProps {
   onClose?: () => void;
 }
 
-export default function Sidebar({
-  mobileOpen = false,
-  onClose = () => {},
-}: SidebarProps) {
+const Sidebar = forwardRef<HTMLElement, SidebarProps>(function Sidebar(
+  { mobileOpen = false, onClose = () => {} },
+  ref,
+) {
   const pathname = usePathname();
   const router = useRouter();
   const { profile, role, isLoading, signOut } = useAuth();
@@ -104,14 +104,19 @@ export default function Sidebar({
 
   return (
     <aside
+      ref={ref}
+      id="dashboard-navigation"
       role={mobileOpen ? "dialog" : undefined}
       aria-modal={mobileOpen ? true : undefined}
       aria-label="Dashboard navigation"
       className={[
-        "fixed left-0 top-0 z-50 flex h-dvh w-[min(84vw,320px)] flex-col md:w-[240px]",
-        "transition-transform duration-300 ease-in-out",
-        mobileOpen ? "translate-x-0" : "-translate-x-full",
-        "md:translate-x-0",
+        "fixed left-0 top-0 z-50 flex h-dvh w-[min(84vw,320px)] flex-col xl:w-[240px]",
+        // Closed drawer is invisible as well as off-screen so Tab can't reach its links.
+        // Visibility flips instantly on open (so focus can land) and after the slide on close.
+        mobileOpen
+          ? "visible translate-x-0 [transition:transform_300ms_ease-in-out,visibility_0s]"
+          : "invisible -translate-x-full [transition:transform_300ms_ease-in-out,visibility_0s_300ms]",
+        "xl:visible xl:translate-x-0",
       ].join(" ")}
       style={{
         backgroundColor: "var(--background-subtle)",
@@ -120,7 +125,7 @@ export default function Sidebar({
     >
       {/* Brand */}
       <div
-        className="mobile-safe-top flex items-center justify-between px-5 py-5 md:px-6 md:py-6"
+        className="mobile-safe-top flex items-center justify-between px-5 py-5 xl:px-6 xl:py-6"
         style={{ borderBottom: "1px solid var(--border-subtle)" }}
       >
         <Link
@@ -149,10 +154,12 @@ export default function Sidebar({
             }}
           />
         </Link>
-        {/* Close button — mobile only */}
+        {/* Close button — drawer only */}
         <button
-          className="ml-2 grid size-11 place-items-center rounded-xl md:hidden"
+          type="button"
+          className="ml-2 grid size-11 place-items-center rounded-xl xl:hidden"
           onClick={onClose}
+          aria-label="Close menu"
           style={{ color: "var(--text-muted)" }}
         >
           <X size={18} />
@@ -257,4 +264,6 @@ export default function Sidebar({
       </div>
     </aside>
   );
-}
+});
+
+export default Sidebar;

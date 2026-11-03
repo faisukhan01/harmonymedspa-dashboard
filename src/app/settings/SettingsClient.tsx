@@ -30,6 +30,7 @@ import {
   useDashboardCachedData,
 } from "@/lib/dashboard-data-cache";
 import ThemeSelector from "@/components/theme/ThemeSelector";
+import StackedTable from "@/components/ui/StackedTable";
 
 const GOLD = "var(--brand-primary)";
 const PANEL = "var(--surface-2)";
@@ -1271,8 +1272,8 @@ export default function SettingsClient() {
                         );
                       })}
                     </div>
-                    <div className="hidden overflow-x-auto md:block">
-                      <table className="w-full min-w-[540px] border-separate border-spacing-0">
+                    <StackedTable className="hidden md:block">
+                      <table className="w-full border-separate border-spacing-0">
                         <thead>
                           <tr style={{ backgroundColor: "var(--background-subtle)" }}>
                             {[
@@ -1453,7 +1454,7 @@ export default function SettingsClient() {
                             : "No staff yet. Click Add Staff to get started."}
                         </div>
                       )}
-                    </div>
+                    </StackedTable>
                   </>
                 )}
               </div>

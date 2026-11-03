@@ -944,7 +944,7 @@ function ActivityHeatmap({ days }: { days: OverviewResponse["activityByDay"] }) 
   return (
     <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
       <div className="min-w-0">
-        <div className="flex items-start gap-2 overflow-x-auto pb-1">
+        <div className="flex flex-wrap items-start gap-2 pb-1">
           <div className="grid shrink-0 gap-[4px] pt-[2px] text-[9px] text-[var(--text-muted)]" style={{ gridTemplateRows: "repeat(7, 15px)" }}>
             {["", "Mon", "", "Wed", "", "Fri", ""].map((wlabel, i) => (
               <span key={i} className="flex h-[15px] items-center leading-none">{wlabel}</span>

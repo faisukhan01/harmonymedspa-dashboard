@@ -28,8 +28,9 @@
 .statusChoices { display:flex; gap:8px; flex-wrap:wrap; padding:0 22px 18px; align-items:center; }
 .choice { border:1px solid var(--border-subtle); border-radius:20px; display:flex; gap:6px; align-items:center; padding:6px 10px; font-size:11px; }
 .choice:has(input:checked) { background:var(--brand-primary-soft); border-color:var(--brand-primary); }
-.tableWrap { overflow-x:auto; border-top:1px solid var(--border-subtle); }
+.tableWrap { border-top:1px solid var(--border-subtle); }
 .table { width:100%; border-collapse:collapse; font-size:12px; white-space:nowrap; }
+.patientTable { white-space:normal; }
 .table th { padding:13px 14px; background:var(--background-subtle); font-size:10px; color:var(--text-muted); text-align:left; letter-spacing:.05em; font-weight:650; }
 .table th button { display:inline-flex; gap:5px; align-items:center; }
 .table td { padding:18px 14px; border-top:1px solid var(--border-subtle); }
@@ -102,7 +103,7 @@
 .healthStrip span { font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); }
 .healthStrip strong { font-size:20px; font-weight:750; font-variant-numeric:tabular-nums; color:var(--brand-primary-strong); }
 .healthStrip small { grid-column:1/-1; font-size:11px; color:var(--text-muted); }
-.tabs { display:flex; gap:6px; border-bottom:1px solid var(--border-subtle); overflow:auto; }
+.tabs { display:flex; flex-wrap:wrap; gap:6px; border-bottom:1px solid var(--border-subtle); }
 .tabs button { padding:13px 18px; font-size:12px; font-weight:650; white-space:nowrap; border-bottom:2px solid transparent; }
 .tabs button[aria-current] { color:var(--brand-primary); border-color:var(--brand-primary); }
 .campaignGrid { display:grid; grid-template-columns:1.2fr 1fr; gap:20px; min-width:0; }
@@ -162,7 +163,7 @@
 .issueList ul { max-height:160px; overflow:auto; margin-top:10px; display:grid; gap:8px; }
 .issueList li { display:grid; gap:2px; }
 .issueList li span, .issueList small { color:var(--text-muted); }
-.previewTable { border:1px solid var(--border-subtle); border-radius:14px; overflow-x:auto; }
+.previewTable { border:1px solid var(--border-subtle); border-radius:14px; }
 .previewTable table { width:100%; border-collapse:collapse; font-size:12px; }
 .previewTable th { text-align:left; padding:10px 12px; background:var(--background-subtle); color:var(--text-muted); font-size:10px; font-weight:650; letter-spacing:.05em; }
 .previewTable td { padding:10px 12px; border-top:1px solid var(--border-subtle); white-space:nowrap; }

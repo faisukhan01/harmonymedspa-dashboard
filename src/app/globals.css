@@ -567,6 +567,78 @@ select:disabled {
   -webkit-overflow-scrolling: touch;
 }
 
+/* StackedTable: rows reflow into labelled cards when the columns can't fit. */
+.stacked-table {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.stacked-table[data-stacked] table,
+.stacked-table[data-stacked] tbody,
+.stacked-table[data-stacked] tr,
+.stacked-table[data-stacked] td {
+  display: block;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+.stacked-table[data-stacked] thead,
+.stacked-table[data-stacked] thead tr {
+  position: static !important;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  background: transparent !important;
+}
+/* Headers only survive stacking when they hold a control (sort, select all). */
+.stacked-table[data-stacked] th {
+  display: none;
+  min-width: 0 !important;
+}
+.stacked-table[data-stacked] th:has(button, input) {
+  position: static !important;
+  display: block;
+  padding: 0.35rem 0.5rem !important;
+  border: 0 !important;
+}
+.stacked-table[data-stacked] tbody tr {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr));
+  gap: 0.6rem 1rem;
+  padding: 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.stacked-table[data-stacked] tbody tr:last-child {
+  border-bottom: 0;
+}
+.stacked-table[data-stacked] td {
+  position: static !important;
+  box-sizing: border-box;
+  padding: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  text-align: left !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+}
+/* Unlabelled cells (row selection, actions, full-width notes) take their own line. */
+.stacked-table[data-stacked] td[data-label=""] {
+  grid-column: 1 / -1;
+}
+.stacked-table[data-stacked] td:not([data-label=""])::before {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: var(--text-muted);
+  content: attr(data-label);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
 .recharts-cartesian-grid-horizontal line,
 .recharts-cartesian-grid-vertical line {
   stroke: var(--chart-grid) !important;
@@ -1469,6 +1541,7 @@ select:disabled {
   line-height: 1.08;
 }
 .blog-preview-paper--simple .blog-preview-content {
+  overflow-wrap: anywhere;
   max-width: 900px;
   margin: 0 auto;
   padding: clamp(2.25rem, 6vw, 5rem) clamp(1.25rem, 6vw, 4.5rem);
@@ -1702,7 +1775,7 @@ select:disabled {
   white-space: nowrap;
 }
 .blog-editorial-runway {
-  overflow-x: auto;
+  overflow: hidden;
   border: 1px solid var(--border-subtle);
   border-radius: 1.1rem;
   background: var(--surface-1);
@@ -1713,8 +1786,7 @@ select:disabled {
 }
 .blog-editorial-runway ol {
   display: grid;
-  min-width: 680px;
-  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   margin: 0;
   padding: 0;
   list-style: none;

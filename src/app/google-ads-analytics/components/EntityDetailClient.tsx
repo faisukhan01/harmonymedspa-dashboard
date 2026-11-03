@@ -524,7 +524,7 @@ const DETAIL_TABS: Record<EntityKind, string[]> = {
 function DetailTabs({ tabs, active }: { tabs: string[]; active: string }) {
   return (
     <nav
-      className="google-ads-tabs flex gap-1 overflow-x-auto border-b py-2"
+      className="google-ads-tabs flex flex-wrap gap-1 border-b py-2"
       style={{ borderColor: "var(--border-subtle)" }}
     >
       {tabs.map((tab) => (

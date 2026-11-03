@@ -1081,14 +1081,14 @@
   color: var(--text-primary);
 }
 .tableWrap {
-  overflow: auto;
+  overflow-y: auto;
   max-height: 430px;
   border: 1px solid var(--border-subtle);
   border-radius: 8px;
 }
 .table {
   width: 100%;
-  min-width: 760px;
+  min-width: 0;
   border-collapse: collapse;
   text-align: left;
   font-size: 11px;
@@ -1118,7 +1118,7 @@
   color: var(--text-secondary);
 }
 .table td:first-child {
-  min-width: 230px;
+  min-width: 0;
   color: var(--text-primary);
 }
 .table tbody tr:hover {

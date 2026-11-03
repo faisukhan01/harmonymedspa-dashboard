@@ -3,6 +3,7 @@
 import { ArrowUpRight, Mail, MessageSquare } from "lucide-react";
 import { formatCampaignDate } from "@/lib/campaigns/campaign-date";
 import type { MessageLog } from "@/types/message-log";
+import StackedTable from "@/components/ui/StackedTable";
 
 type LeadLike = {
   id: string;
@@ -150,8 +151,8 @@ export default function CampaignConversationTable({
         })}
       </div>
 
-      <div className="hidden overflow-x-auto rounded-2xl bg-[var(--surface-1)] md:block">
-        <table className="w-full min-w-[1380px] text-left text-sm xl:min-w-[1280px]">
+      <StackedTable stackBelow={1100} className="hidden rounded-2xl bg-[var(--surface-1)] md:block">
+        <table className="w-full text-left text-sm">
           <thead className="bg-[var(--surface-2)] text-[var(--text-muted)]">
             <tr>
               {[
@@ -234,7 +235,7 @@ export default function CampaignConversationTable({
             })}
           </tbody>
         </table>
-      </div>
+      </StackedTable>
     </>
   );
 }

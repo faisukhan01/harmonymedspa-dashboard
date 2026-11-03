@@ -54,6 +54,7 @@ import type {
   WorkspaceSnapshot,
   WorkspaceTotals,
 } from "../workspace-types";
+import StackedTable from "@/components/ui/StackedTable";
 
 const PendingAdsPanel = dynamic(
   () => import("@/app/dashboard/PendingAdsPanel"),
@@ -766,7 +767,7 @@ function Overview({
         <TrendChart daily={snapshot.daily} />
       )}
 
-      <div className="grid gap-4 xl:grid-cols-[minmax(0,1.45fr)_minmax(320px,.55fr)]">
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1.45fr)_minmax(320px,.55fr)]">
         <section
           className="rounded-2xl border p-4 sm:p-5"
           style={{
@@ -2628,24 +2629,26 @@ function columnMetadata(label: string): ResponsiveColumn {
 function DataTable({
   columns,
   children,
+  alwaysVisible = false,
 }: {
   columns: Array<string | ResponsiveColumn>;
   children: React.ReactNode;
+  /** For tables with no separate phone card list. */
+  alwaysVisible?: boolean;
 }) {
   const resolvedColumns = columns.map((column) =>
     typeof column === "string" ? columnMetadata(column) : column,
   );
   return (
-    <div
-      className="google-ads-table-shell hidden max-h-[70vh] w-full min-w-0 max-w-full overflow-auto overscroll-x-contain rounded-2xl border md:block"
+    <StackedTable
+      stackBelow={resolvedColumns.length * 90}
+      className={`google-ads-table-shell max-h-[70vh] w-full overflow-y-auto rounded-2xl border ${alwaysVisible ? "" : "hidden md:block"}`}
       style={{
         borderColor: "var(--border-subtle)",
         background: "var(--surface-1)",
       }}
-      tabIndex={0}
-      aria-label="Scrollable Google Ads data table"
     >
-      <table className="google-ads-table w-full min-w-max table-auto border-separate border-spacing-0 text-left text-[13px] tabular-nums">
+      <table className="google-ads-table w-full table-auto border-separate border-spacing-0 text-left text-[13px] tabular-nums">
         <thead>
           <tr>
             {resolvedColumns.map((column) => (
@@ -2665,7 +2668,7 @@ function DataTable({
         </thead>
         <tbody>{children}</tbody>
       </table>
-    </div>
+    </StackedTable>
   );
 }
 function NameCell({
@@ -2755,7 +2758,7 @@ function SearchTermsTable({ campaignScope }: { campaignScope: string }) {
       title="Search terms"
       description="The real searches that triggered your ads. Rows with spend and no conversions are highlighted as possible negative keywords."
     >
-      <DataTable columns={["Search term", "Matched keyword", "Match type", "Campaign / ad group", "Spend", "Impressions", "Clicks", "CTR", "Conversions"]}>
+      <DataTable alwaysVisible columns={["Search term", "Matched keyword", "Match type", "Campaign / ad group", "Spend", "Impressions", "Clicks", "CTR", "Conversions"]}>
         {sorted.map((item) => {
           const wasted = item.cost > 0 && !item.conversions;
           return (
@@ -2793,7 +2796,7 @@ function ConversionsTab({ rows }: { rows: ConversionActionRow[] }) {
       title="Conversions by action"
       description="Which conversion actions Google Ads counted in this range. 'Conversions' are the ones used for bidding; 'All conversions' include secondary actions."
     >
-      <DataTable columns={["Conversion action", "Category", "Conversions", "Conv. value", "All conversions", "All conv. value"]}>
+      <DataTable alwaysVisible columns={["Conversion action", "Category", "Conversions", "Conv. value", "All conversions", "All conv. value"]}>
         {byAction.map((item) => (
           <tr key={item.actionId} className="border-b">
             <td><strong className="text-sm">{item.actionName}</strong><small>ID {item.actionId}</small></td>
@@ -2897,12 +2900,12 @@ export default function GoogleAdsWorkspace({
         <div
           ref={tabScroller}
           onScroll={updateTabOverflow}
-          className="google-ads-tabs overflow-x-auto px-1"
+          className="google-ads-tabs px-1"
         >
           <nav
             aria-label="Google Ads workspace sections"
             role="tablist"
-            className="flex min-w-max gap-1 py-2"
+            className="flex flex-wrap gap-1 py-2"
           >
             {TABS.map(({ id, label, icon: Icon }) => (
               <button

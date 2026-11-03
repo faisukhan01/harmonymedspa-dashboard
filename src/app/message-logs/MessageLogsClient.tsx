@@ -8,6 +8,7 @@ import {
 import { DASHBOARD_REFRESH_EVENT } from "@/lib/dashboard-refresh";
 import { DATA_CACHE_KEYS, setCachedData, useDashboardCachedData } from "@/lib/dashboard-data-cache";
 import type { DeliveryStatus, MessageChannel, MessageLog } from "@/types/message-log";
+import StackedTable from "@/components/ui/StackedTable";
 
 const GOLD        = "#C9A84C";
 const PANEL       = "var(--background-subtle)";
@@ -475,8 +476,8 @@ export default function MessageLogsClient() {
         <>
           {/* Desktop table */}
           <div className="hidden md:block rounded-2xl border overflow-hidden" style={{ borderColor: BORDER }}>
-            <div className="overflow-x-auto max-h-[60vh] overflow-y-auto">
-              <table className="w-full min-w-[900px] border-separate border-spacing-0">
+            <StackedTable stackBelow={760} className="max-h-[60vh] overflow-y-auto">
+              <table className="w-full border-separate border-spacing-0">
                 <thead className="sticky top-0 z-10">
                   <tr style={{ backgroundColor: "var(--background-subtle)" }}>
                     {["Recipient", "Channel", "Sequence", "Message Preview", "Status", "Sent", ""].map(h => (
@@ -537,7 +538,7 @@ export default function MessageLogsClient() {
                   ))}
                 </tbody>
               </table>
-            </div>
+            </StackedTable>
           </div>
 
           {/* Mobile cards */}

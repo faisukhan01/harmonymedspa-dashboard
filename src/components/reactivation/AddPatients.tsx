@@ -7,6 +7,7 @@ import { ChevronDown, Download, FileSpreadsheet, UserPlus, Users, Search, CheckC
 import PatientDialog from "./PatientDialog";
 import { csvPatient, emptyPatient, MAX_IMPORT_BYTES, MAX_IMPORT_ROWS, PATIENT_STATUSES, patientContactKeys, validatePatient, type PatientInput, type PatientImportResult, type LeadCandidate } from "@/lib/reactivation/patient-input";
 import s from "./reactivation.module.css";
+import StackedTable from "@/components/ui/StackedTable";
 type Mode="leads"|"manual"|"csv";
 const titles={leads:"Add patients from leads",manual:"Add a patient",csv:"Import patients from CSV"};
 const PREVIEW_ROWS=8;
@@ -140,7 +141,7 @@ export default function AddPatients({onAdded}:{onAdded:()=>void|Promise<void>}){
           {csvRows.length>0&&<>
             <div className={s.csvStats}><div><strong>{formatCount(validCount)}</strong><span>Ready to add</span></div><div className={invalidRows.length?s.statWarn:""}><strong>{formatCount(invalidRows.length)}</strong><span>Need fixing</span></div><div><strong>{formatCount(duplicateCount)}</strong><span>Duplicates in file</span></div></div>
             {invalidRows.length>0&&<div className={s.issueList}><p><AlertTriangle size={14}/>These rows will be skipped. Fix them in the file and re-upload if you want them included.</p><ul>{invalidRows.slice(0,50).map(r=><li key={r.row}><strong>Row {r.row} · {r.name}</strong><span>{r.errors.join("; ")}</span></li>)}</ul>{invalidRows.length>50&&<small>+ {formatCount(invalidRows.length-50)} more rows need fixing</small>}</div>}
-            <div className={s.previewTable}><table><thead><tr><th>Row</th><th>Name</th><th>Email</th><th>Source</th></tr></thead><tbody>{preview.filter(r=>r.patient&&!r.duplicate).slice(0,PREVIEW_ROWS).map(r=><tr key={r.row}><td>{r.row}</td><td>{r.patient?.name}</td><td>{r.patient?.email||r.patient?.phone}</td><td>{r.patient?.source||"Manual"}</td></tr>)}</tbody></table>{validCount>PREVIEW_ROWS&&<small>Showing {PREVIEW_ROWS} of {formatCount(validCount)} ready rows</small>}</div>
+            <StackedTable className={s.previewTable}><table><thead><tr><th>Row</th><th>Name</th><th>Email</th><th>Source</th></tr></thead><tbody>{preview.filter(r=>r.patient&&!r.duplicate).slice(0,PREVIEW_ROWS).map(r=><tr key={r.row}><td>{r.row}</td><td>{r.patient?.name}</td><td>{r.patient?.email||r.patient?.phone}</td><td>{r.patient?.source||"Manual"}</td></tr>)}</tbody></table>{validCount>PREVIEW_ROWS&&<small>Showing {PREVIEW_ROWS} of {formatCount(validCount)} ready rows</small>}</StackedTable>
           </>}
         </>}
       </>}

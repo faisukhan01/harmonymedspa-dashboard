@@ -208,7 +208,7 @@ export default function GoogleBusinessClient() {
 
       {/* Tabs */}
       <div style={{ borderBottom: `1px solid ${BORDER}` }}>
-        <div className="flex gap-0 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
+        <div className="flex flex-wrap gap-0">
           {([
             { key: "reviews", label: "Reviews", icon: Star },
             { key: "insights", label: "Local Insights", icon: MapPin },

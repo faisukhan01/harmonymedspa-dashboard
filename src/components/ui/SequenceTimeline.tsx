@@ -23,7 +23,7 @@ interface SequenceTimelineProps {
 
 export default function SequenceTimeline({ stepCounts = [] }: SequenceTimelineProps) {
   return (
-    <div className="flex items-start gap-0 overflow-x-auto pb-2">
+    <div className="flex flex-wrap items-start gap-y-3 pb-2">
       {steps.map((step, i) => {
         const count = stepCounts[i] ?? step.leadsCount;
         const Icon = step.type === "sms" ? MessageSquare : step.type === "email" ? Mail : Zap;

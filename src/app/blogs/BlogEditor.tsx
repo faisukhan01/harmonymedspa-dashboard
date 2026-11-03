@@ -729,7 +729,7 @@ export default function BlogEditor({ mode, recordId, canEdit, canDelete = false,
               <div className="mt-4 rounded-xl border p-3" style={{ backgroundColor: "var(--surface-2)", borderColor: "var(--border-subtle)" }}><p className="text-[10px] font-extrabold uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>Canonical preview</p><p className="mt-1 break-all text-[11px] leading-5" style={{ color: "var(--text-secondary)" }}>{technicalSeo.canonical}</p></div>
               <details className="mt-3 rounded-xl border" style={{ borderColor: "var(--border-subtle)" }}>
                 <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-2 px-3 text-xs font-bold" style={{ color: "var(--text-secondary)" }}><span className="inline-flex items-center gap-2"><Code2 size={14} /> View article schema</span><ChevronRight size={14} /></summary>
-                <pre className="max-h-64 overflow-auto border-t p-3 text-[10px] leading-5" style={{ borderColor: "var(--border-subtle)", color: "var(--text-muted)" }}>{JSON.stringify(technicalSeo.articleSchema, null, 2)}</pre>
+                <pre className="max-h-64 overflow-y-auto whitespace-pre-wrap break-all border-t p-3 text-[10px] leading-5" style={{ borderColor: "var(--border-subtle)", color: "var(--text-muted)" }}>{JSON.stringify(technicalSeo.articleSchema, null, 2)}</pre>
               </details>
               <div className="mt-3 text-[11px] leading-5" style={{ color: "var(--text-muted)" }}><p className="font-bold" style={{ color: "var(--text-secondary)" }}>Breadcrumbs</p><p className="mt-1">{technicalSeo.breadcrumbs.map((item) => item.name).join(" → ")}</p></div>
             </div>

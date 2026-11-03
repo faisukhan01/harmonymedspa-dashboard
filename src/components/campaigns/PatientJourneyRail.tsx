@@ -52,7 +52,7 @@ export default function PatientJourneyRail({
         </p>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-2 sm:hidden">
+      <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 min-[1100px]:hidden">
         {steps.map(({ step, count, Icon }, index) => (
           <div
             key={step}
@@ -79,8 +79,8 @@ export default function PatientJourneyRail({
         ))}
       </div>
 
-      <div className="mt-6 hidden overflow-x-auto pb-2 sm:block">
-        <div className="relative flex min-w-[760px] items-start justify-between">
+      <div className="mt-6 hidden pb-2 min-[1100px]:block">
+        <div className="relative flex items-start justify-between">
           <div className="absolute left-[7%] right-[7%] top-6 h-px bg-gradient-to-r from-[#C9A84C]/25 via-[#4ECDC4]/45 to-[#4ECDC4]/20" />
           {steps.map(({ step, count, Icon }, index) => (
             <div

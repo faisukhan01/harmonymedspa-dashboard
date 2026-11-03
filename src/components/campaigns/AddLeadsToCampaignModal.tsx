@@ -15,6 +15,7 @@ import {
   retryableEnrollmentFailures,
 } from "@/lib/campaigns/enrollment-results";
 import type { BulkEnrollmentResult } from "@/lib/types/campaigns";
+import StackedTable from "@/components/ui/StackedTable";
 type Lead = {
   id: string;
   name: string;
@@ -383,7 +384,7 @@ export default function AddLeadsToCampaignModal({
           <Result result={result} onClose={onClose} onRetry={() => retryFailed(result.failed)} />
         ) : (
           <>
-            <nav className="flex shrink-0 overflow-x-auto border-b border-(--border-subtle) px-4">
+            <nav className="flex shrink-0 flex-wrap border-b border-(--border-subtle) px-4">
               {[
                 ["existing", "Select Existing Leads"],
                 ["new", "Add New Lead"],
@@ -646,8 +647,8 @@ function Existing({
           );
         })}
       </div>
-      <div className="mt-4 hidden overflow-x-auto rounded-xl border border-(--border-subtle) bg-(--surface-1) sm:block">
-        <table className="w-full min-w-[700px] text-left text-xs">
+      <StackedTable stackBelow={640} className="mt-4 hidden rounded-xl border border-(--border-subtle) bg-(--surface-1) sm:block">
+        <table className="w-full text-left text-xs">
           <thead className="bg-(--surface-2) text-(--text-muted)">
             <tr>
               <th className="p-3">
@@ -708,7 +709,7 @@ function Existing({
             })}
           </tbody>
         </table>
-      </div>
+      </StackedTable>
     </>
   );
 }
@@ -880,8 +881,8 @@ function CsvPanel({
           </label>
         ))}
       </div>
-      <div className="mt-4 hidden max-h-80 overflow-auto rounded-xl border border-(--border-subtle) sm:block">
-        <table className="w-full min-w-[760px] text-left text-xs">
+      <StackedTable stackBelow={640} className="mt-4 hidden max-h-80 overflow-y-auto rounded-xl border border-(--border-subtle) sm:block">
+        <table className="w-full text-left text-xs">
           <thead className="sticky top-0 bg-(--surface-2) text-(--text-muted)">
             <tr>
               {[
@@ -935,7 +936,7 @@ function CsvPanel({
             ))}
           </tbody>
         </table>
-      </div>
+      </StackedTable>
     </>
   );
 }

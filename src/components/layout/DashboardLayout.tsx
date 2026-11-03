@@ -23,6 +23,7 @@ export default function DashboardLayout({
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showCallPrompt, setShowCallPrompt] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const drawerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
   const { user, isLoading } = useAuth();
 
@@ -42,13 +43,42 @@ export default function DashboardLayout({
     const previousOverflow = document.body.style.overflow;
     const menuButton = menuButtonRef.current;
     document.body.style.overflow = "hidden";
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMobileOpen(false);
+    const drawer = drawerRef.current;
+    const focusable = () =>
+      Array.from(
+        drawer?.querySelectorAll<HTMLElement>("a[href], button:not([disabled])") ?? [],
+      );
+    focusable()[0]?.focus();
+    const handleKeydown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileOpen(false);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const items = focusable();
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      const active = document.activeElement;
+      if (event.shiftKey && (active === first || !drawer?.contains(active))) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (active === last || !drawer?.contains(active))) {
+        event.preventDefault();
+        first.focus();
+      }
     };
-    document.addEventListener("keydown", closeOnEscape);
+    // Widening past the drawer breakpoint swaps to the fixed sidebar, so release the scroll lock.
+    const desktop = window.matchMedia("(min-width: 1280px)");
+    const closeOnDesktop = () => {
+      if (desktop.matches) setMobileOpen(false);
+    };
+    document.addEventListener("keydown", handleKeydown);
+    desktop.addEventListener("change", closeOnDesktop);
     return () => {
       document.body.style.overflow = previousOverflow;
-      document.removeEventListener("keydown", closeOnEscape);
+      document.removeEventListener("keydown", handleKeydown);
+      desktop.removeEventListener("change", closeOnDesktop);
       menuButton?.focus();
     };
   }, [mobileOpen]);
@@ -61,20 +91,20 @@ export default function DashboardLayout({
       style={{ backgroundColor: "var(--background)" }}
     >
       {/* Sidebar */}
-      <Sidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <Sidebar ref={drawerRef} mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
 
-      {/* Mobile backdrop */}
+      {/* Drawer backdrop */}
       {mobileOpen && (
         <div
           aria-hidden="true"
-          className="fixed inset-0 z-40 bg-black/70 backdrop-blur-[2px] md:hidden"
+          className="fixed inset-0 z-40 bg-black/70 backdrop-blur-[2px] xl:hidden"
           onClick={() => setMobileOpen(false)}
         />
       )}
 
-      {/* Main content — offset by sidebar on md+ */}
+      {/* Main content — offset by sidebar on xl+ */}
       <main
-        className="min-h-dvh w-full min-w-0 max-w-full flex-1 overflow-x-hidden md:ml-[240px]"
+        className="min-h-dvh w-full min-w-0 max-w-full flex-1 overflow-x-hidden xl:ml-[240px]"
         style={{ backgroundColor: "var(--background)" }}
       >
         {showCallPrompt && (
@@ -114,13 +144,15 @@ export default function DashboardLayout({
             borderBottom: "1px solid var(--border-subtle)",
           }}
         >
-          {/* Hamburger — mobile only */}
+          {/* Hamburger — shown while the sidebar is a drawer */}
           <button
             ref={menuButtonRef}
-            className="-ml-1 grid size-11 flex-shrink-0 place-items-center rounded-xl md:hidden"
+            className="-ml-1 grid size-11 flex-shrink-0 place-items-center rounded-xl xl:hidden"
             onClick={() => setMobileOpen(true)}
             style={{ color: "var(--brand-primary)" }}
             aria-label="Open menu"
+            aria-expanded={mobileOpen}
+            aria-controls="dashboard-navigation"
           >
             <Menu size={22} />
           </button>
@@ -143,7 +175,7 @@ export default function DashboardLayout({
           </div>
 
           {actions && (
-            <div className="flex items-center gap-2 flex-shrink-0">
+            <div className="flex min-w-0 flex-wrap items-center justify-end gap-2">
               {actions}
             </div>
           )}

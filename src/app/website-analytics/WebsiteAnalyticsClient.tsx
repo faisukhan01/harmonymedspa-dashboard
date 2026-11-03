@@ -40,6 +40,7 @@ import type {
   WebsiteAnalyticsSnapshot,
   WebsiteAnalyticsSummary,
 } from "@/lib/google/analytics-types";
+import StackedTable from "@/components/ui/StackedTable";
 
 type AnalyticsError = {
   message: string;
@@ -330,7 +331,7 @@ function SetupState({ error }: { error: AnalyticsError }) {
             </summary>
             <div className="space-y-2 border-t p-3" style={{ borderColor: "var(--border-subtle)" }}>
               {missing.map((item) => (
-                <code key={item} className="block overflow-x-auto rounded-lg px-3 py-2 text-[10px]" style={{ color: "var(--brand-primary-strong)", background: "var(--surface-2)" }}>
+                <code key={item} className="block break-all rounded-lg px-3 py-2 text-[10px]" style={{ color: "var(--brand-primary-strong)", background: "var(--surface-2)" }}>
                   {item}
                 </code>
               ))}
@@ -953,8 +954,8 @@ export default function WebsiteAnalyticsClient() {
                     </article>
                   ))}
                 </div>
-                <div className="hidden overflow-x-auto md:block">
-                  <table className="w-full min-w-[780px] border-collapse text-left text-xs">
+                <StackedTable stackBelow={700} className="hidden md:block">
+                  <table className="w-full border-collapse text-left text-xs">
                     <thead>
                       <tr style={{ color: "var(--text-muted)", borderBottom: "1px solid var(--border-subtle)" }}>
                         <th className="pb-3 pr-4 font-bold uppercase tracking-wider">Page</th>
@@ -977,7 +978,7 @@ export default function WebsiteAnalyticsClient() {
                       ))}
                     </tbody>
                   </table>
-                </div>
+                </StackedTable>
               </Panel>
 
               <Panel
@@ -1014,8 +1015,8 @@ export default function WebsiteAnalyticsClient() {
                     </article>
                   ))}
                 </div>
-                <div className="hidden overflow-x-auto md:block">
-                  <table className="w-full min-w-[980px] border-collapse text-left text-xs">
+                <StackedTable stackBelow={900} className="hidden md:block">
+                  <table className="w-full border-collapse text-left text-xs">
                     <thead>
                       <tr style={{ color: "var(--text-muted)", borderBottom: "1px solid var(--border-subtle)" }}>
                         {[
@@ -1047,7 +1048,7 @@ export default function WebsiteAnalyticsClient() {
                       ))}
                     </tbody>
                   </table>
-                </div>
+                </StackedTable>
               </Panel>
             </>
           )}

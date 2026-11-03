@@ -310,7 +310,7 @@ function DeliveryPill({ label, value }: { label: string; value: string }) {
         className="h-1.5 w-1.5 rounded-full"
         style={{ backgroundColor: color }}
       />
-      {value || "-"}
+      {label} {value || "-"}
     </span>
   );
 }
@@ -684,7 +684,7 @@ function StatCard({
 function SummarySkeleton() {
   return (
     <div
-      className="grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-6"
+      className="grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 2xl:grid-cols-6"
       aria-label="Loading Lead summary"
       role="status"
     >
@@ -2606,7 +2606,7 @@ export default function LeadsClient() {
           {summaryLoading ? (
             <SummarySkeleton />
           ) : (
-            <div className="grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-6">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 2xl:grid-cols-6">
               {summaryCardsFor(activeView, leadSummary).map((card) => {
                 const { status, ...stat } = card;
                 return (
@@ -2993,30 +2993,27 @@ export default function LeadsClient() {
       ) : (
         <>
           <div
-            className="hidden overflow-visible rounded-2xl border md:block"
+            className="hidden overflow-visible rounded-2xl border lg:block"
             style={{ borderColor: BORDER, backgroundColor: CARD }}
           >
-            <div className="max-h-[68vh] overflow-auto">
-              <table className="w-full min-w-[1120px] border-separate border-spacing-0">
+            <div className="max-h-[68vh] overflow-y-auto overflow-x-hidden">
+              <table className="w-full table-fixed border-separate border-spacing-0">
                 <thead className="sticky top-0 z-10">
                   <tr style={{ backgroundColor: "var(--background-subtle)" }}>
                     {[
-                      { key: "name", label: "Name" },
-                      { key: "phone", label: "Phone" },
-                      { key: "email-address", label: "Email" },
-                      { key: "source", label: "Source" },
-                      { key: "status", label: "Status" },
-                      { key: "campaigns", label: "Campaigns" },
-                      { key: "replied", label: "Replied" },
-                      { key: "sms", label: "SMS" },
-                      { key: "email-delivery", label: "Email" },
-                      { key: "created-at", label: "Created At" },
-                      { key: "last-contacted", label: "Last Contacted" },
-                      { key: "actions", label: "" },
+                      { key: "name", label: "Name", width: "w-[16%]" },
+                      { key: "contact", label: "Contact", width: "w-[15%]" },
+                      { key: "source", label: "Source", width: "w-[11%]" },
+                      { key: "status", label: "Status", width: "w-[108px]" },
+                      { key: "campaigns", label: "Campaigns", width: "" },
+                      { key: "replied", label: "Replied", width: "w-[60px]" },
+                      { key: "delivery", label: "Delivery", width: "w-[100px]" },
+                      { key: "activity", label: "Activity", width: "w-[84px]" },
+                      { key: "actions", label: "", width: "w-[108px]" },
                     ].map((heading) => (
                       <th
                         key={heading.key}
-                        className={`border-b py-3 text-left text-[10px] font-bold uppercase tracking-[0.09em] ${heading.key === "actions" ? "w-[108px] min-w-[108px] px-2" : "px-3"}`}
+                        className={`border-b py-3 text-left text-[10px] font-bold uppercase tracking-[0.09em] ${heading.width} ${heading.key === "actions" ? "px-2" : "px-3"}`}
                         style={{ color: DIM, borderColor: BORDER_SOFT }}
                       >
                         {heading.label}
@@ -3047,12 +3044,12 @@ export default function LeadsClient() {
                         }}
                       >
                         <td
-                          className="border-b px-4 py-3"
+                          className="border-b px-3 py-3"
                           style={{ borderColor: BORDER_SOFT }}
                         >
-                          <div className="flex items-center gap-3">
+                          <div className="flex min-w-0 items-center gap-2.5">
                             <div
-                              className="flex h-9 w-9 items-center justify-center rounded-xl border text-xs font-extrabold"
+                              className="hidden h-9 w-9 shrink-0 items-center min-[1440px]:flex justify-center rounded-xl border text-xs font-extrabold"
                               style={{
                                 color: GOLD,
                                 backgroundColor: "rgba(201,168,76,0.09)",
@@ -3063,13 +3060,13 @@ export default function LeadsClient() {
                             </div>
                             <div className="min-w-0">
                               <p
-                                className="truncate text-sm font-bold"
+                                className="text-sm font-bold [overflow-wrap:anywhere]"
                                 style={{ color: TEXT }}
                               >
                                 {lead.name || "Unnamed lead"}
                               </p>
                               <p
-                                className="truncate text-[11px]"
+                                className="text-[11px] [overflow-wrap:anywhere]"
                                 style={{ color: duplicate ? "#A1A1AA" : DIM }}
                               >
                                 {duplicate
@@ -3081,19 +3078,14 @@ export default function LeadsClient() {
                           </div>
                         </td>
                         <td
-                          className="border-b px-4 py-3 text-sm"
+                          className="border-b px-3 py-3 text-xs [overflow-wrap:anywhere]"
                           style={{ borderColor: BORDER_SOFT, color: MUTED }}
                         >
-                          {lead.phone || "-"}
+                          <span className="block">{lead.phone || "-"}</span>
+                          <span className="mt-0.5 block">{lead.email || "-"}</span>
                         </td>
                         <td
-                          className="border-b px-4 py-3 text-sm"
-                          style={{ borderColor: BORDER_SOFT, color: MUTED }}
-                        >
-                          {lead.email || "-"}
-                        </td>
-                        <td
-                          className="border-b px-4 py-3 text-xs font-semibold"
+                          className="border-b px-3 py-3 text-xs font-semibold [overflow-wrap:anywhere]"
                           style={{ borderColor: BORDER_SOFT, color: TEXT }}
                         >
                           <span className="block">{sourceLabel(lead.source)}</span>
@@ -3109,7 +3101,7 @@ export default function LeadsClient() {
                           )}
                         </td>
                         <td
-                          className="border-b px-4 py-3"
+                          className="border-b px-1.5 py-3"
                           style={{ borderColor: BORDER_SOFT }}
                           onClick={(event) => event.stopPropagation()}
                         >
@@ -3119,7 +3111,7 @@ export default function LeadsClient() {
                               onChange={(event) =>
                                 changeRowStatus(lead, event.target.value)
                               }
-                              className="rounded-full border px-2.5 py-1 text-[11px] font-bold"
+                              className="w-full max-w-full rounded-full border px-2 py-1 text-[11px] font-bold"
                               style={{
                                 color: (
                                   STATUS_CONFIG[lead.status] ??
@@ -3147,13 +3139,13 @@ export default function LeadsClient() {
                           )}
                         </td>
                         <td
-                          className="border-b px-4 py-3"
+                          className="border-b px-3 py-3 [overflow-wrap:anywhere]"
                           style={{ borderColor: BORDER_SOFT }}
                         >
                           <LeadCampaignBadges campaigns={lead.campaigns} />
                         </td>
                         <td
-                          className="border-b px-4 py-3"
+                          className="border-b px-3 py-3"
                           style={{ borderColor: BORDER_SOFT }}
                           onClick={(event) => event.stopPropagation()}
                         >
@@ -3195,39 +3187,33 @@ export default function LeadsClient() {
                           </button>
                         </td>
                         <td
-                          className="border-b px-4 py-3"
+                          className="border-b px-1.5 py-3"
                           style={{ borderColor: BORDER_SOFT }}
                         >
-                          <DeliveryPill
-                            label="SMS"
-                            value={lead.smsSentStatus}
-                          />
+                          <div className="flex flex-col items-start gap-1">
+                            <DeliveryPill
+                              label="SMS"
+                              value={lead.smsSentStatus}
+                            />
+                            <DeliveryPill
+                              label="Email"
+                              value={lead.emailSentStatus}
+                            />
+                          </div>
                         </td>
                         <td
-                          className="border-b px-4 py-3"
-                          style={{ borderColor: BORDER_SOFT }}
-                        >
-                          <DeliveryPill
-                            label="Email"
-                            value={lead.emailSentStatus}
-                          />
-                        </td>
-                        <td
-                          className="border-b px-4 py-3 text-xs"
+                          className="border-b px-3 py-3 text-[11px] leading-4"
                           style={{ borderColor: BORDER_SOFT, color: MUTED }}
                         >
-                          {timeAgo(lead.createdAt)}
+                          <span className="block">Created {timeAgo(lead.createdAt)}</span>
+                          <span className="mt-1 block">
+                            {lastContacted(lead)
+                              ? `Contacted ${timeAgo(lastContacted(lead))}`
+                              : "Not contacted"}
+                          </span>
                         </td>
                         <td
-                          className="border-b px-4 py-3 text-xs"
-                          style={{ borderColor: BORDER_SOFT, color: MUTED }}
-                        >
-                          {lastContacted(lead)
-                            ? timeAgo(lastContacted(lead))
-                            : "Not contacted"}
-                        </td>
-                        <td
-                          className="relative w-[108px] min-w-[108px] border-b px-2 py-3 text-right"
+                          className="relative border-b px-2 py-3 text-right"
                           style={{ borderColor: BORDER_SOFT }}
                           onClick={(event) => event.stopPropagation()}
                         >
@@ -3329,7 +3315,7 @@ export default function LeadsClient() {
             </div>
           </div>
 
-          <div className="grid min-w-0 grid-cols-1 gap-3 md:hidden">
+          <div className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-2 lg:hidden">
             {filtered.map((lead) => {
               const duplicate = isDuplicateLead(lead);
               return (
@@ -3367,17 +3353,42 @@ export default function LeadsClient() {
                           {lead.name || "Unnamed lead"}
                         </p>
                         <p
-                          className="mt-1 truncate text-xs"
+                          className="mt-1 text-xs [overflow-wrap:anywhere]"
                           style={{ color: MUTED }}
                         >
-                          {lead.phone || lead.email || "No contact captured"}
+                          {lead.phone || (lead.email ? "" : "No contact captured")}
                         </p>
+                        {lead.email && (
+                          <p
+                            className="mt-0.5 text-xs [overflow-wrap:anywhere]"
+                            style={{ color: MUTED }}
+                          >
+                            {lead.email}
+                          </p>
+                        )}
                         <LeadClassificationChips lead={lead} />
                       </div>
                     </div>
                     <StatusPill status={lead.status} />
                   </div>
                   <div className="mt-4 grid gap-2">
+                    <div
+                      className="rounded-xl px-3 py-2"
+                      style={{ backgroundColor: "var(--surface-2)" }}
+                    >
+                      <p
+                        className="text-[10px] font-bold uppercase tracking-[0.08em]"
+                        style={{ color: DIM }}
+                      >
+                        Source
+                      </p>
+                      <p
+                        className="mt-1 text-xs font-semibold [overflow-wrap:anywhere]"
+                        style={{ color: TEXT }}
+                      >
+                        {sourceLabel(lead.source)}
+                      </p>
+                    </div>
                     <div
                       className="rounded-xl px-3 py-2"
                       style={{ backgroundColor: "var(--surface-2)" }}

@@ -8,6 +8,7 @@ import {
   type VisibilityRow,
 } from "@/lib/aeo/visibility";
 import styles from "./aeo.module.css";
+import StackedTable from "@/components/ui/StackedTable";
 
 type SortKey =
   | "prompt"
@@ -114,7 +115,7 @@ export default function PromptResultsTable({
           </select>
         </label>
       </div>
-      <div className={styles.tableWrap}>
+      <StackedTable stackBelow={720} className={styles.tableWrap}>
         <table className={styles.table}>
           <caption className={styles.srOnly}>
             Latest result for each prompt on each engine
@@ -173,7 +174,7 @@ export default function PromptResultsTable({
             ) : null}
           </tbody>
         </table>
-      </div>
+      </StackedTable>
     </div>
   );
 }
