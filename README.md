@@ -1,11 +1,26 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=220&color=0:B99656,100:0F766E&text=Harmony%20MedSpa&fontSize=64&fontColor=fffdf9&desc=Growth%20Command%20Center&descSize=22&descAlignY=72&descY=68&animation=fadeIn" width="100%" alt="Harmony MedSpa Growth Command Center banner"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:B99656,50:D8BC80,100:0F766E&height=240&section=header&text=Harmony%20Med%20Spa&fontSize=72&fontColor=fffdf9&fontAlignY=30&desc=Growth%20Command%20Center&descSize=26&descAlignY=55&animation=fadeIn" width="100%" alt="Harmony MedSpa Growth Command Center — animated banner"/>
 
 <br/>
 
-<a href="https://www.harmonymedspafl.com/"><img src="https://img.shields.io/badge/Live_Website-harmonymedspafl.com-B99656?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live Website"/></a>
-<a href="https://crm.harmonymedspafl.com/login"><img src="https://img.shields.io/badge/CRM_Dashboard-crm.harmonymedspafl.com-0F766E?style=for-the-badge&logo=googlechrome&logoColor=white" alt="CRM Dashboard Login"/></a>
+### 🏥 The patient-growth & marketing CRM powering Harmony MedSpa
+
+**Leads · Speed-to-Lead · 14-Day Nurture · Google Ads · GA4 · Blog CMS · RBAC · Audit**
+
+<br/>
+
+<a href="https://www.harmonymedspafl.com/"><img src="https://img.shields.io/badge/%F0%9F%8C%90_Live_Website-harmonymedspafl.com-B99656?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live Website — harmonymedspafl.com"/></a>
+<a href="https://crm.harmonymedspafl.com/login"><img src="https://img.shields.io/badge/%F0%9F%94%90_CRM_Dashboard-crm.harmonymedspafl.com%2Flogin-0F766E?style=for-the-badge&logo=googlechrome&logoColor=white" alt="CRM Dashboard Login — crm.harmonymedspafl.com/login"/></a>
+
+<br/>
+<br/>
+
+<img src="https://img.shields.io/github/stars/faisukhan01/harmonymedspa-dashboard?style=flat-square&color=B99656&label=Stars" alt="GitHub stars"/>
+<img src="https://img.shields.io/github/forks/faisukhan01/harmonymedspa-dashboard?style=flat-square&color=0F766E&label=Forks" alt="GitHub forks"/>
+<img src="https://img.shields.io/github/issues/faisukhan01/harmonymedspa-dashboard?style=flat-square&color=B99656&label=Issues" alt="Open issues"/>
+<img src="https://img.shields.io/github/last-commit/faisukhan01/harmonymedspa-dashboard?style=flat-square&color=0F766E&label=Last%20Commit" alt="Last commit"/>
+<img src="https://img.shields.io/github/commit-activity/m/faisukhan01/harmonymedspa-dashboard?style=flat-square&color=B99656&label=Commits%2FMonth" alt="Commit activity per month"/>
 
 <br/>
 <br/>
@@ -18,13 +33,18 @@
 <a href="https://airtable.com"><img src="https://img.shields.io/badge/Airtable-18BFBF?style=flat-square&logo=airtable&logoColor=white" alt="Airtable"/></a>
 <a href="https://recharts.org"><img src="https://img.shields.io/badge/Recharts-888888?style=flat-square&logo=recharts&logoColor=white" alt="Recharts"/></a>
 
-<img src="https://readme-typing-svg.demolab.com?font=Inter:wght@600&size=22&duration=2800&pause=900&color=B99656&center=true&vCenter=true&repeat=true&width=820&height=80&lines=Turning+patient+inquiries+into+booked+appointments+%E2%9A%A1;Leads+%E2%86%92+Speed-to-Lead+%E2%86%92+14-Day+Nurture+%E2%86%92+Booked+%F0%9F%93%88;Google+Ads+%C2%B7+GA4+%C2%B7+Automation+%C2%B7+AI+Ad+Drafts+%F0%9F%A4%96;Built+for+the+Harmony+MedSpa+team+in+Sarasota%2C+FL+%F0%9F%8C%B4" alt="Animated tagline"/>
+<img src="https://skillicons.dev/icons?i=nextjs,react,ts,tailwind,supabase,vercel" height="34" alt="Tech stack icons"/>
+
+<br/>
+<br/>
+
+<img src="https://readme-typing-svg.demolab.com?font=Inter:wght@600&size=22&duration=2800&pause=900&color=B99656&center=true&vCenter=true&repeat=true&width=840&height=70&lines=Turning+patient+inquiries+into+booked+appointments+%E2%9A%A1;Leads+%E2%86%92+Speed-to-Lead+%E2%86%92+14-Day+Nurture+%E2%86%92+Booked+%F0%9F%93%88;Google+Ads+%C2%B7+GA4+%C2%B7+Automation+%C2%B7+AI+Ad+Drafts+%F0%9F%A4%96;Built+for+the+Harmony+MedSpa+team+in+Sarasota%2C+FL+%F0%9F%8C%B4" alt="Animated tagline"/>
 
 </div>
 
----
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:B99656,100:0F766E&height=3" width="100%" alt=""/>
 
-> **Harmony Growth Command Center** is the private, production-grade patient-growth and marketing-operations platform powering **[Harmony MedSpa](https://www.harmonymedspafl.com/)** — bringing lead management, automated nurture campaigns, Google Ads reporting & publishing, GA4 analytics, an editorial blog CMS, role-based staff access and append-only audit history into one beautiful command center.
+> **Harmony Growth Command Center** is the private, production-grade platform behind **[Harmony MedSpa](https://www.harmonymedspafl.com/)** — one beautiful workspace for lead management, automated nurture campaigns, Google Ads reporting & publishing, GA4 analytics, an editorial blog CMS, role-based staff access, and an append-only audit history.
 >
 > 🖥️ **Public site** → [www.harmonymedspafl.com](https://www.harmonymedspafl.com/) &nbsp;•&nbsp; 🔐 **CRM login** → [crm.harmonymedspafl.com/login](https://crm.harmonymedspafl.com/login)
 
@@ -34,29 +54,37 @@
 
 <table>
   <tr>
-    <td width="50%" align="center"><strong>🔐 Secure staff login</strong><br/><br/><img src=".github/assets/login.png" alt="Harmony MedSpa CRM login screen" width="100%"/></td>
-    <td width="50%" align="center"><strong>📱 Fully responsive</strong><br/><br/><img src=".github/assets/login-mobile.png" alt="Mobile responsive login" width="60%"/></td>
+    <td colspan="2" align="center"><strong>🔐 Secure staff login — warm gold-on-stone, real-brand welcome</strong><br/><br/><img src=".github/assets/login.png" alt="Harmony MedSpa CRM login screen with gold branding over a spa interior" width="100%"/></td>
   </tr>
   <tr>
-    <td align="center" colspan="2"><strong>🎯 Public lead capture — feeds Speed-to-Lead in seconds</strong><br/><br/><img src=".github/assets/lead-form.png" alt="Public lead capture form" width="72%"/></td>
+    <td width="38%" align="center"><strong>📱 Mobile-first</strong><br/><br/><img src=".github/assets/login-mobile.png" alt="Mobile responsive login screen" width="72%"/></td>
+    <td width="62%" align="center"><strong>🎯 Public <code>/lead</code> capture — feeds Speed-to-Lead in seconds</strong><br/><br/><img src=".github/assets/lead-form.png" alt="Public lead capture form — Book Your Free Consultation" width="100%"/></td>
   </tr>
 </table>
 
 ---
 
+## ⚡ The growth engine, in one line
+
+<div align="center">
+
+**🎯 Inquiry** → ⚡ **Speed-to-Lead responds in < 60 s** (SMS + Email) → 🌱 **14-Day Nurture** (5 touchpoints) → 📅 **Booked & tracked** → 📈 **GA4 + Google Ads insights feed the next campaign**
+
+</div>
+
 ## ✨ What makes it special
 
 | | |
 |---|---|
-| 🧭 **Growth Overview** | Six live KPIs (leads → contacted → replied → booked), period-over-period comparisons, sparklines, conversion funnels, and attention signals — one integration failing never erases the page. |
+| 🧭 **Growth Overview** | Six live KPIs (leads → contacted → replied → booked), period-over-period comparisons, sparklines, conversion funnels & attention signals — one integration failing never erases the page. |
 | ⚡ **Speed-to-Lead** | Instant SMS + email response for every new inquiry, delivery health, reply tracking, and per-lead conversation timelines. |
-| 🌱 **14-Day Nurture** | A 5-step journey (Day 1 → Day 12), DST-safe New-York-time scheduling stored as UTC, bulk enrollment, CSV import, idempotency claims, and disconnected-enrollment cleanup. |
-| 📣 **Google Ads workspace** | Relational drill-downs from campaigns → ad groups → ads → keywords, live inventory & status actions, AI-generated responsive-search-ad suggestions, and human-approved **paused-RSA publishing** via Make.com. |
-| 📊 **GA4 website analytics** | Direct Google Analytics Data API integration — visitors, engagement, acquisition, devices, top pages, tracked streams, and hostname separation. |
-| 📝 **Editorial blog CMS** | Structured blocks, FAQs, auto-generated SEO packages (Open Graph, JSON-LD, sitemap eligibility), draft → published lifecycle with manual human confirmation. |
+| 🌱 **14-Day Nurture** | A 5-step journey (Day 1 → Day 12), DST-safe New-York-time scheduling stored as UTC, bulk enrollment, CSV import, idempotency claims & disconnected-enrollment cleanup. |
+| 📣 **Google Ads workspace** | Drill-downs from campaigns → ad groups → ads → keywords, live inventory & status actions, AI-generated responsive-search-ad suggestions, and human-approved **paused-RSA publishing** via Make.com. |
+| 📊 **GA4 analytics** | Direct Google Analytics Data API integration — visitors, engagement, acquisition, devices, top pages, tracked streams & hostname separation. |
+| 📝 **Editorial blog CMS** | Structured blocks, FAQs, auto-generated SEO packages (Open Graph, JSON-LD, sitemap eligibility), and a draft → published lifecycle with manual human confirmation. |
 | 🛡️ **RBAC + audit trail** | `admin` / `editor` / `viewer` roles enforced server-side on every route, append-only sanitized audit logs, and self-protection so admins can't lock themselves out. |
-| 📥 **Lead operations** | Cursor pagination, full-dataset summaries, duplicate detection, delete-impact checks, filter-aware CSV export up to 10,000 rows. |
-| 🌗 **Crafted UI** | Warm gold-on-stone light theme, graphite dark mode, System preference, tabular numerals, mobile cards for dense tables, reduced-motion support. |
+| 📥 **Lead operations** | Cursor pagination, full-dataset summaries, duplicate detection, delete-impact checks & filter-aware CSV export up to 10,000 rows. |
+| 🌗 **Crafted UI** | Warm gold-on-stone light theme, graphite dark mode, system preference, tabular numerals, mobile cards for dense tables & reduced-motion support. |
 
 ---
 
@@ -83,7 +111,7 @@ flowchart LR
   D --> SB
 ```
 
-**Sources of truth by design** — Airtable owns live operational & marketing data, Supabase owns identity/authorization/audit, Make.com owns external automation, Google owns reporting & execution. Secrets stay server-side; the client AuthProvider is presentation only.
+**Sources of truth by design** — Airtable owns live operational & marketing data, Supabase owns identity / authorization / audit, Make.com owns external automation, Google owns reporting & execution. Secrets stay server-side; the client AuthProvider is presentation only.
 
 ---
 
@@ -92,9 +120,9 @@ flowchart LR
 ```bash
 git clone https://github.com/faisukhan01/harmonymedspa-dashboard.git
 cd harmonymedspa-dashboard
-bun install        # or: npm install
+npm install            # or: bun install
 cp .env.local.example .env.local   # add your own credentials
-npm run dev        # → http://localhost:3000
+npm run dev            # → http://localhost:3000
 ```
 
 <details>
@@ -180,6 +208,17 @@ automation/               # Make.com blueprints (Speed-to-Lead, Daily Call Impor
 
 ---
 
+## 📊 Repository activity
+
+<table>
+  <tr>
+    <td width="52%" align="center"><strong>📅 Contribution calendar — in Harmony gold</strong><br/><br/><img src="https://ghchart.rshah.org/B99656/faisukhan01" alt="GitHub contribution calendar in Harmony gold" width="100%"/></td>
+    <td width="48%" align="center"><strong>🔥 Commit streak</strong><br/><br/><img src="https://streak-stats.demolab.com/?user=faisukhan01&hide_blank_months=true&background=FFFDF9&ring=B99656&fire=E9B44C&currStreakNum=0F766E&sideNums=52525B&currStreakLabel=B99656&sideLabels=52525B&dates=71717A" alt="Commit streak card" width="100%"/></td>
+  </tr>
+</table>
+
+---
+
 ## 🌐 Live
 
 | | |
@@ -195,6 +234,7 @@ automation/               # Make.com blueprints (Speed-to-Lead, Daily Call Impor
 
 **Crafted with ❤️ for Harmony MedSpa · Sarasota, Florida**
 
-<img src="https://img.shields.io/badge/Made_with-Next.js_16_·_React_19_·_Tailwind_4-black?style=flat-square" alt="stack footer badge"/>
+<a href="https://www.harmonymedspafl.com/"><img src="https://img.shields.io/badge/harmonymedspafl.com-B99656?style=flat-square&logo=googlechrome&logoColor=white" alt="harmonymedspafl.com"/></a>
+<a href="https://crm.harmonymedspafl.com/login"><img src="https://img.shields.io/badge/crm.harmonymedspafl.com%2Flogin-0F766E?style=flat-square&logo=googlechrome&logoColor=white" alt="crm.harmonymedspafl.com/login"/></a>
 
 </div>
