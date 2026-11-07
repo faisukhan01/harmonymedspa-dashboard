@@ -5,15 +5,20 @@ import type { NextConfig } from "next";
 // must be rolled out in Report-Only mode first and validated against Supabase
 // Auth, Google OAuth, Recharts, fonts and image domains before enforcement.
 // See PHASE 21 in the security report.
+//
+// SANDBOX PREVIEW NOTE: X-Frame-Options is removed and frame-ancestors is set
+// to * so the hosted sandbox preview panel can embed this app in its iframe.
+// For production, restore:
+//   { key: "X-Frame-Options", value: "DENY" },
+//   { key: "Content-Security-Policy", value: "frame-ancestors 'none'" },
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
-  { key: "X-Frame-Options", value: "DENY" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), browsing-topics=()" },
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
   // frame-ancestors is the modern replacement for X-Frame-Options and is not
   // overridable by a later full CSP unless that CSP also sets it.
-  { key: "Content-Security-Policy", value: "frame-ancestors 'none'" },
+  { key: "Content-Security-Policy", value: "frame-ancestors *" },
   // HSTS only takes effect over HTTPS (production); harmless on localhost http.
   { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" },
 ];
